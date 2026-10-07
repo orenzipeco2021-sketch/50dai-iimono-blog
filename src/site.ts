@@ -1,3 +1,3 @@
-// 個人の楽天ROOM URLが決まったら、https://room.rakuten.co.jp/… を設定します。
-export const roomUrl: string | null = null;
+// このブログで紹介する楽天ROOM。
+export const roomUrl: string | null = "https://room.rakuten.co.jp/room_c836dc669f/items";
 export const roomHref = roomUrl ?? "https://room.rakuten.co.jp/";

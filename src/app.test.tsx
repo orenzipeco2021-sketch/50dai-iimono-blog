@@ -62,10 +62,10 @@ it("6つのカテゴリへの入口と楽天ROOMへの導線がある", async ()
       screen.getByRole("button", { name }).getAttribute("aria-pressed"),
     ).toBe("true");
   }
-  const link = screen.getByRole("link", { name: /楽天ROOMを見てみる/ });
-  expect(link.getAttribute("href")).toBe("https://room.rakuten.co.jp/");
+  const link = screen.getByRole("link", { name: /楽天ROOMでいいものを見る/ });
+  expect(link.getAttribute("href")).toBe("https://room.rakuten.co.jp/room_c836dc669f/items");
   expect(link.getAttribute("rel")).toContain("noopener");
-  expect(screen.getByText(/個人のROOMは準備中/)).toBeTruthy();
+  expect(screen.queryByText(/個人のROOMは準備中/)).toBeNull();
 });
 it("検索結果がない場合に一覧へ戻せる", async () => {
   const user = userEvent.setup();
