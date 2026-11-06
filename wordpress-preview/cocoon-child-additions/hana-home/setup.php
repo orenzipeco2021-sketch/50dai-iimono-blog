@@ -55,7 +55,7 @@ add_action('customize_register', function ($customizer) {
 
 add_action('wp_enqueue_scripts', function () {
     if (is_page_template('page-hana-home.php')) {
-        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.0.0');
+        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.1.0');
     }
 }, 99);
 
