@@ -1,0 +1,3 @@
+/* 既存の Cocoon Child/functions.php の PHP 内の末尾に、この1行だけ追加します。
+   新しい <?php は追加しません。末尾に ?> がある場合は、その直前に追加します。 */
+require_once get_stylesheet_directory() . '/hana-home/setup.php';
