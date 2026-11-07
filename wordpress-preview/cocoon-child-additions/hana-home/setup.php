@@ -38,7 +38,7 @@ add_action('customize_register', function ($customizer) {
     $customizer->add_setting('hhana_hero', array('default' => 0, 'sanitize_callback' => 'hhana_image_id'));
     $customizer->add_control(new WP_Customize_Media_Control($customizer, 'hhana_hero', array(
         'label' => '文字なしの「私とハナ」イラスト', 'section' => 'hhana_home', 'mime_type' => 'image',
-        'description' => '横長の画像を推奨。全体を表示し、文字は重ねません。代替テキストはメディアライブラリで設定できます。',
+        'description' => '未設定時は同梱の「私とハナ」を表示。変更するときは横長画像を選択してください。全体を表示し、文字は重ねません。代替テキストはメディアライブラリで設定できます。',
     )));
     $choices = array(0 => '未設定（準備中と表示）');
     $terms = get_terms(array('taxonomy' => 'category', 'hide_empty' => false));
@@ -60,7 +60,7 @@ add_action('customize_register', function ($customizer) {
 
 add_action('wp_enqueue_scripts', function () {
     if (is_page_template('page-hana-home.php')) {
-        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.2.0');
+        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.3.0');
     }
 }, 99);
 

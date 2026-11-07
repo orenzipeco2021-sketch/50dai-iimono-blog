@@ -38,11 +38,11 @@ $hhana_subtitle = get_theme_mod('hhana_subtitle', 'ハナと私の、心地よ�
         <figure class="hh-hero-figure">
         <?php $hero = absint(get_theme_mod('hhana_hero', 0));
         if ($hero && wp_attachment_is_image($hero)) :
-            echo wp_get_attachment_image($hero, 'large', false, array('class' => 'hh-hero-image', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 760px) 100vw, 600px'));
+            echo wp_get_attachment_image($hero, 'large', false, array('class' => 'hh-hero-image', 'loading' => 'eager', 'fetchpriority' => 'high', 'sizes' => '(max-width: 900px) 100vw, 700px'));
         else : ?>
-            <div class="hh-image-placeholder" role="img" aria-label="メインイラストは準備中"><span aria-hidden="true">❧</span></div>
+            <img class="hh-hero-image" src="<?php echo esc_url(get_stylesheet_directory_uri() . '/hana-home/assets/hana-hero.jpg'); ?>" width="1672" height="941" alt="窓辺でハナとお茶の時間を過ごす私の水彩風イラスト" loading="eager" fetchpriority="high">
         <?php endif; ?>
-            <figcaption><?php echo $hero && wp_attachment_is_image($hero) ? 'ハナと私の、いつもの時間。' : '「私とハナ」のイラストは、これから。'; ?></figcaption>
+            <figcaption>ハナと私の、いつもの時間。</figcaption>
         </figure>
     </section>
     <section class="hh-topics hh-section" aria-labelledby="hh-topics-title">

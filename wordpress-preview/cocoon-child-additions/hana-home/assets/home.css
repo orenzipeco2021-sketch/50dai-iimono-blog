@@ -114,3 +114,10 @@ body.hh-home{margin:0;background:#fcfaf6;color:#48443f}
 .hh-watercolor-panel .hh-watercolor{width:74%;flex-shrink:0}
 .hh-site .hh-watercolor-panel>.hh-category-image{width:88%;height:88%;object-fit:contain}
 @media(max-width:600px){.hh-topic-icon{width:112px;height:112px;border-radius:22px}}
+
+/* 1.3: the selected illustration is displayed intact, separately from all copy. */
+.hh-hero{grid-template-columns:minmax(0,.92fr) minmax(0,1.18fr)}
+.hh-hero-figure{padding:28px 24px 28px 0}
+.hh-site .hh-hero-image{width:100%;height:auto;max-height:none;object-fit:contain;border-radius:14px}
+@media(max-width:900px){.hh-hero{grid-template-columns:1fr}.hh-hero-copy{padding:32px 28px 24px}.hh-hero-figure{padding:0 24px 24px}}
+@media(max-width:600px){.hh-hero-copy{padding:30px 22px 24px}.hh-hero-figure{padding:0 14px 18px}.hh-site .hh-hero-image{border-radius:10px}}
