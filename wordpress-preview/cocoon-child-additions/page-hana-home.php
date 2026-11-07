@@ -5,6 +5,7 @@
  */
 defined('ABSPATH') || exit;
 require_once get_stylesheet_directory() . '/hana-home/setup.php';
+$room = hhana_room_url();
 $hhana_title = get_theme_mod('hhana_title', '60代からのいいもの探し');
 $hhana_subtitle = get_theme_mod('hhana_subtitle', 'ハナと私の、心地よい暮らし');
 ?><!doctype html>
@@ -21,7 +22,7 @@ $hhana_subtitle = get_theme_mod('hhana_subtitle', 'ハナと私の、心地よ�
 <div class="hh-topnote">毎日に、小さな「いいな」を。</div>
 <header class="hh-header hh-wrap">
     <a class="hh-brand" href="<?php echo esc_url(home_url('/')); ?>"><span aria-hidden="true" class="hh-sprig">❧</span><?php echo esc_html($hhana_title); ?></a>
-    <nav aria-label="メインメニュー"><a href="#hh-articles">新着記事</a><a href="#hh-about">このブログについて</a><a class="hh-room-nav" href="#hh-room">楽天ROOM ↗</a></nav>
+    <nav aria-label="メインメニュー"><a href="#hh-articles">新着記事</a><a href="#hh-about">このブログについて</a><a class="hh-room-nav" href="<?php echo esc_url($room); ?>" target="_blank" rel="noopener noreferrer sponsored">楽天ROOM ↗<span class="hh-sr">（新しいタブで開きます）</span></a></nav>
 </header>
 <main id="hh-main" class="hh-wrap">
 <?php if (post_password_required()) : ?>
@@ -99,7 +100,7 @@ $hhana_subtitle = get_theme_mod('hhana_subtitle', 'ハナと私の、心地よ�
     <section id="hh-room" class="hh-room hh-section" aria-labelledby="hh-room-title">
         <div class="hh-room-mark" aria-hidden="true"><span>楽天</span>ROOM<small>暮らしに、ときめきを。</small></div>
         <div><p class="hh-eyebrow">MY FAVORITES</p><h2 id="hh-room-title">お気に入りを、<br>ひとつずつ。</h2><p>毎日をちょっと心地よくするもの。<br>気になるものを、楽天ROOMに集めています。</p>
-        <?php $room = get_theme_mod('hhana_room', ''); if ($room && esc_url($room)) : ?>
+        <?php if ($room && esc_url($room)) : ?>
             <a class="hh-button hh-rose" href="<?php echo esc_url($room); ?>" target="_blank" rel="noopener noreferrer sponsored">楽天ROOMを見てみる ↗<span class="hh-sr">（新しいタブで開きます）</span></a>
         <?php else : ?><p class="hh-room-pending">楽天ROOMへのご案内は準備中です。</p><?php endif; ?>
         <p class="hh-small">リンク先には、商品購入により紹介者へ報酬が発生するものがあります。</p></div>

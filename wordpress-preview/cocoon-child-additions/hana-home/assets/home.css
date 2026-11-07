@@ -121,3 +121,8 @@ body.hh-home{margin:0;background:#fcfaf6;color:#48443f}
 .hh-site .hh-hero-image{width:100%;height:auto;max-height:none;object-fit:contain;border-radius:14px}
 @media(max-width:900px){.hh-hero{grid-template-columns:1fr}.hh-hero-copy{padding:32px 28px 24px}.hh-hero-figure{padding:0 24px 24px}}
 @media(max-width:600px){.hh-hero-copy{padding:30px 22px 24px}.hh-hero-figure{padding:0 14px 18px}.hh-site .hh-hero-image{border-radius:10px}}
+
+/* 1.4: direct ROOM links with touch-friendly targets. */
+.hh-header .hh-room-nav{min-height:48px;padding:8px 16px}
+.hh-room .hh-button{min-height:48px;max-width:100%}
+@media(max-width:600px){.hh-header .hh-room-nav{min-height:48px;padding:8px 16px}.hh-room .hh-button{width:100%;justify-content:center;gap:8px}}

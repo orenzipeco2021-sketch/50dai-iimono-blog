@@ -54,13 +54,13 @@ add_action('customize_register', function ($customizer) {
         $customizer->add_setting('hhana_cat_' . $key, array('default' => 0, 'sanitize_callback' => 'hhana_category_id'));
         $customizer->add_control('hhana_cat_' . $key, array('label' => $item[0] . ' のリンク先', 'section' => 'hhana_home', 'type' => 'select', 'choices' => $choices));
     }
-    $customizer->add_setting('hhana_room', array('default' => '', 'sanitize_callback' => 'esc_url_raw'));
-    $customizer->add_control('hhana_room', array('label' => '楽天ROOMのURL', 'section' => 'hhana_home', 'type' => 'url', 'description' => 'ご自身のROOMを確認して入力。空欄なら準備中と表示します。'));
+    $customizer->add_setting('hhana_room', array('default' => hhana_default_room_url(), 'sanitize_callback' => 'esc_url_raw'));
+    $customizer->add_control('hhana_room', array('label' => '楽天ROOMのURL', 'section' => 'hhana_home', 'type' => 'url', 'description' => '初期値はご指定のhana0905（リンク先は未確認・仮設定）。空欄の場合も初期値を使用します。紹介欄とヘッダーで共通のURLです。'));
 });
 
 add_action('wp_enqueue_scripts', function () {
     if (is_page_template('page-hana-home.php')) {
-        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.3.0');
+        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.4.0');
     }
 }, 99);
 
@@ -86,4 +86,13 @@ function hhana_post_art() {
         if ($id && has_category($id)) { return hhana_topic_image($key, $item[2]); }
     }
     return hhana_icon('home');
+}
+
+/** User-supplied URL, provisional: remote destination could not be verified. */
+function hhana_default_room_url() {
+    return 'https://room.rakuten.co.jp/hana0905/items';
+}
+function hhana_room_url() {
+    $url = esc_url(get_theme_mod('hhana_room', hhana_default_room_url()));
+    return $url ? $url : hhana_default_room_url();
 }
