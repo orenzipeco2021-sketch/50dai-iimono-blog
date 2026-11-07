@@ -56,7 +56,7 @@ $hhana_subtitle = get_theme_mod('hhana_subtitle', 'ハナと私の、心地よ�
         ?>
             <div class="hh-topic hh-topic-<?php echo esc_attr($key); ?>">
             <?php if ($url) : ?><a href="<?php echo esc_url($url); ?>"><?php endif; ?>
-                <span class="hh-topic-icon"><?php echo hhana_icon($item[2]); ?></span>
+                <span class="hh-topic-icon"><?php echo hhana_topic_image($key, $item[2]); ?></span>
                 <h3><?php echo esc_html($item[0]); ?></h3>
                 <p><?php echo esc_html($item[1]); ?></p>
                 <span class="hh-topic-more"><?php echo $url ? '記事を読む →' : 'ただいま準備中'; ?></span>
@@ -76,7 +76,7 @@ $hhana_subtitle = get_theme_mod('hhana_subtitle', 'ハナと私の、心地よ�
             <article class="hh-card"><a href="<?php the_permalink(); ?>">
                 <?php if (has_post_thumbnail()) : ?>
                     <div class="hh-card-image"><?php the_post_thumbnail('medium_large', array('loading' => 'lazy', 'sizes' => '(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px')); ?></div>
-                <?php else : ?><div class="hh-card-image hh-noimage" aria-hidden="true"><?php echo hhana_icon('home'); ?></div><?php endif; ?>
+                <?php else : ?><div class="hh-card-image hh-noimage hh-watercolor-panel" aria-hidden="true"><?php echo hhana_post_art(); ?></div><?php endif; ?>
                 <div class="hh-card-body">
                     <div class="hh-meta"><time datetime="<?php echo esc_attr(get_the_date('c')); ?>"><?php echo esc_html(get_the_date('Y.m.d')); ?></time>
                     <?php $cats = get_the_category(); if ($cats) : ?><span><?php echo esc_html($cats[0]->name); ?></span><?php endif; ?></div>

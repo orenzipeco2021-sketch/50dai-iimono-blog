@@ -46,6 +46,11 @@ add_action('customize_register', function ($customizer) {
         foreach ($terms as $term) { $choices[$term->term_id] = $term->name . '（ID: ' . $term->term_id . '）'; }
     }
     foreach (hhana_topics() as $key => $item) {
+        $customizer->add_setting('hhana_image_' . $key, array('default' => 0, 'sanitize_callback' => 'hhana_image_id'));
+        $customizer->add_control(new WP_Customize_Media_Control($customizer, 'hhana_image_' . $key, array(
+            'label' => $item[0] . ' のイラスト', 'section' => 'hhana_home', 'mime_type' => 'image',
+            'description' => 'JPG・PNG・WebP画像に差し替えできます。未設定時は同梱の水彩風イラスト。正方形を推奨し、画像全体を表示します。',
+        )));
         $customizer->add_setting('hhana_cat_' . $key, array('default' => 0, 'sanitize_callback' => 'hhana_category_id'));
         $customizer->add_control('hhana_cat_' . $key, array('label' => $item[0] . ' のリンク先', 'section' => 'hhana_home', 'type' => 'select', 'choices' => $choices));
     }
@@ -55,12 +60,30 @@ add_action('customize_register', function ($customizer) {
 
 add_action('wp_enqueue_scripts', function () {
     if (is_page_template('page-hana-home.php')) {
-        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.1.0');
+        wp_enqueue_style('hhana-home', get_stylesheet_directory_uri() . '/hana-home/assets/home.css', array(), '1.2.0');
     }
 }, 99);
 
+/** Default artwork is one generated watercolor sheet, framed by CSS without altering the source. */
 function hhana_icon($kind) {
     $allowed = array('gourmet', 'home', 'pet', 'fashion', 'travel', 'beauty');
     if (!in_array($kind, $allowed, true)) { $kind = 'home'; }
-    return '<img class="hh-icon" src="' . esc_url(get_stylesheet_directory_uri() . '/hana-home/assets/' . $kind . '.svg') . '" width="36" height="36" alt="" loading="lazy">';
+    return '<span class="hh-watercolor hh-watercolor-' . esc_attr($kind) . '" aria-hidden="true"></span>';
+}
+
+function hhana_topic_image($key, $kind) {
+    $image_id = absint(get_theme_mod('hhana_image_' . $key, 0));
+    if ($image_id && wp_attachment_is_image($image_id)) {
+        return wp_get_attachment_image($image_id, 'medium', false, array('class' => 'hh-category-image', 'alt' => '', 'loading' => 'lazy', 'sizes' => '(max-width: 600px) 150px, 300px'));
+    }
+    return hhana_icon($kind);
+}
+
+/** Existing post thumbnails take precedence; category art is only a fallback. */
+function hhana_post_art() {
+    foreach (hhana_topics() as $key => $item) {
+        $id = absint(get_theme_mod('hhana_cat_' . $key, 0));
+        if ($id && has_category($id)) { return hhana_topic_image($key, $item[2]); }
+    }
+    return hhana_icon('home');
 }
